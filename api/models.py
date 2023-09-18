@@ -1,100 +1,92 @@
-# Dans le fichier models.py de votre application
-
 from django.db import models
-from decimal import Decimal
+from custumer.models import NewUser
 
-class User(models.Model):
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(max_length=100)
-    adresse_email = models.EmailField(unique=True)
-    mot_de_passe = models.CharField(max_length=128)
-    role = models.CharField(max_length=50)
 
-class Hotel(models.Model):
-    nom_etablissement = models.CharField(max_length=200)
-    adresse = models.CharField(max_length=200)
+# Modèle pour les types de biens
+class PropertyType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+# Modèle pour les biens
+class Property(models.Model):
+    owner = models.ForeignKey(NewUser, on_delete=models.CASCADE)  # L'utilisateur est le propriétaire du bien
+    property_type = models.ForeignKey(PropertyType, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     description = models.TextField()
-    coordonnees_geographiques = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='hotel_images/')  # Ajout d'une image pour l'hôtel
-    gerant = models.ForeignKey(User, on_delete=models.CASCADE)
+    price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
+    address = models.CharField(max_length=255)
+    amenities = models.ManyToManyField('Amenity', blank=True)
+    # Autres champs comme les règles de la maison, les images, etc.
 
-class Room(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='rooms')
-    type_de_chambre = models.CharField(max_length=100)
-    capacite = models.PositiveIntegerField()
-    equipements = models.TextField()
-    tarif_journalier = models.DecimalField(max_digits=10, decimal_places=2)
-    disponible = models.BooleanField(default=True)  # Indique si la chambre est disponible
-    image1 = models.ImageField(upload_to='images_de_la_chambre/',default='jpg')
-    image2 = models.ImageField(upload_to='images_de_la_chambre/',default='jpg')
-    image3 = models.ImageField(upload_to='images_de_la_chambre/',default='jpg')
-    image4 = models.ImageField(upload_to='images_de_la_chambre/',default='jpg')
-    image5 = models.ImageField(upload_to='images_de_la_chambre/',default='jpg')
+    def __str__(self):
+        return self.title
 
+# Modèle pour les types d'utilisateurs (clients et gestionnaires)
+class UserType(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+# Modèle pour les réservations
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    date_debut_sejour = models.DateField()
-    date_fin_sejour = models.DateField()
-    nombre_invite = models.PositiveIntegerField()
-    statut_reservation = models.CharField(max_length=50, choices=[
-        ('en_attente', 'En Attente'),
-        ('confirme', 'Confirmé'),
-        ('annule', 'Annulé'),
-    ])
-    montant_total = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)  # Montant total de la réservation
+    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    check_in_date = models.DateField()
+    check_out_date = models.DateField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    # Ajoutez d'autres champs liés à la réservation
 
-    def calculate_total_amount(self):
-        if self.date_debut_sejour and self.date_fin_sejour and self.room:
-            duration = (self.date_fin_sejour - self.date_debut_sejour).days
-            self.montant_total = Decimal(duration) * self.room.tarif_journalier * Decimal(self.nombre_invite)
-        else:
-            self.montant_total = None
-
+# Modèle pour les commentaires
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    note = models.PositiveIntegerField()
-    commentaire = models.TextField()
+    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.PositiveIntegerField()  # Peut être un champ à choix pour les étoiles, par exemple
+
+# Modèle pour les équipements
+class Amenity(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+# Modèle pour les règles de la maison
+class HouseRules(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    rules = models.TextField()
+
+# Modèle pour les images des biens
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='property_images/')
+
+# Modèle pour les notifications
+class Notification(models.Model):
+    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+# Modèle pour les signalements
+class Report(models.Model):
+    reporter = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    reported_user = models.ForeignKey(NewUser, related_name='reported_user', on_delete=models.CASCADE)
+    reason = models.TextField()
+
+# Modèle pour la disponibilité des biens
+class PropertyAvailability(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    date = models.DateField()
+    is_available = models.BooleanField(default=True)
 
 
-class Facility(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    equipement = models.CharField(max_length=100)
-    description = models.TextField()
-
-class ResidenceType(models.Model):
-    libelle_type = models.CharField(max_length=100)
-    description = models.TextField()
-
-class Residence(models.Model):
-    type = models.ForeignKey(ResidenceType, on_delete=models.CASCADE)
-    nom_etablissement = models.CharField(max_length=200)
-    adresse = models.CharField(max_length=200)
-    description = models.TextField()
-    coordonnees_geographiques = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='residence_images/')  # Ajout d'une image pour la résidence
-    gerant = models.ForeignKey(User, on_delete=models.CASCADE)
-
-class ResidenceRoom(models.Model):
-    residence = models.ForeignKey(Residence, on_delete=models.CASCADE)
-    type_de_chambre = models.CharField(max_length=100)
-    capacite = models.PositiveIntegerField()
-    equipements = models.TextField()
-    tarif_journalier = models.DecimalField(max_digits=10, decimal_places=2)
-    disponible = models.BooleanField(default=True)  # Indique si la chambre est disponible
-    image1 = models.ImageField(upload_to='images_de_la_residence/',default='jpg1')
-    image2 = models.ImageField(upload_to='images_de_la_residence/',default='jpg1')
-    image3 = models.ImageField(upload_to='images_de_la_residence/',default='jpg1')
-    image4 = models.ImageField(upload_to='images_de_la_residence/',default='jpg1')
-    image5 = models.ImageField(upload_to='images_de_la_residence/',default='jpg1')
-
-    # models.py
-
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-@receiver(post_save, sender=Booking)
-def update_booking_total_amount(sender, instance, **kwargs):
-    instance.calculate_total_amount()
-    instance.save()
+# Modèle pour les transactions financières
+class Transaction(models.Model):
+    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    # Ajoutez d'autres champs relatifs à la transaction si nécessaire

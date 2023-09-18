@@ -3,12 +3,15 @@ from .models import*
 # Register your models here.
 
 
-admin.site.register(User)
-admin.site.register(Hotel)
-admin.site.register(Room)
+admin.site.register(PropertyType)
+admin.site.register(Property)
+admin.site.register(UserType)
 admin.site.register(Booking)
 admin.site.register(Review)
-admin.site.register(Facility)
-admin.site.register(ResidenceType)
-admin.site.register(Residence)
-admin.site.register(ResidenceRoom)
+admin.site.register(Amenity)
+admin.site.register(HouseRules)
+admin.site.register(PropertyImage)
+admin.site.register(Notification)
+admin.site.register(Report)
+admin.site.register(PropertyAvailability)
+admin.site.register(Transaction)

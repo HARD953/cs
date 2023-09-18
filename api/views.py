@@ -1,41 +1,85 @@
-# Dans le fichier views.py de votre application
+from rest_framework import generics
+from .models import*
+from .serializers import*
 
-from rest_framework import viewsets
-from .models import User, Hotel, Room, Booking, Review, Facility, ResidenceType, Residence, ResidenceRoom
-from .serializers import UserSerializer, HotelSerializer, RoomSerializer, BookingSerializer, ReviewSerializer, FacilitySerializer, ResidenceTypeSerializer, ResidenceSerializer, ResidenceRoomSerializer
+class PropertyList(generics.ListCreateAPIView):
+    queryset = Property.objects.all()
+    serializer_class = PropertySerializer
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class PropertyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Property.objects.all()
+    serializer_class = PropertySerializer
 
-class HotelViewSet(viewsets.ModelViewSet):
-    queryset = Hotel.objects.all()
-    serializer_class = HotelSerializer
-
-class RoomViewSet(viewsets.ModelViewSet):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
-
-class BookingViewSet(viewsets.ModelViewSet):
+class BookingList(generics.ListCreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
-class ReviewViewSet(viewsets.ModelViewSet):
+class BookingDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+
+class ReviewList(generics.ListCreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
-class FacilityViewSet(viewsets.ModelViewSet):
-    queryset = Facility.objects.all()
-    serializer_class = FacilitySerializer
+class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
-class ResidenceTypeViewSet(viewsets.ModelViewSet):
-    queryset = ResidenceType.objects.all()
-    serializer_class = ResidenceTypeSerializer
+class PropertyImageList(generics.ListCreateAPIView):
+    queryset = PropertyImage.objects.all()
+    serializer_class = PropertyImageSerializer
 
-class ResidenceViewSet(viewsets.ModelViewSet):
-    queryset = Residence.objects.all()
-    serializer_class = ResidenceSerializer
+class PropertyImageDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = PropertyImage.objects.all()
+    serializer_class = PropertyImageSerializer
 
-class ResidenceRoomViewSet(viewsets.ModelViewSet):
-    queryset = ResidenceRoom.objects.all()
-    serializer_class = ResidenceRoomSerializer
+class AmenityList(generics.ListCreateAPIView):
+    queryset = Amenity.objects.all()
+    serializer_class = AmenitySerializer
+
+class AmenityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Amenity.objects.all()
+    serializer_class = AmenitySerializer
+
+class HouseRulesList(generics.ListCreateAPIView):
+    queryset = HouseRules.objects.all()
+    serializer_class = HouseRulesSerializer
+
+class HouseRulesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = HouseRules.objects.all()
+    serializer_class = HouseRulesSerializer
+
+class PropertyAvailabilityList(generics.ListCreateAPIView):
+    queryset = PropertyAvailability.objects.all()
+    serializer_class = PropertyAvailabilitySerializer
+
+class TransactionList(generics.ListCreateAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+class ReportList(generics.ListCreateAPIView):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+
+class NotificationList(generics.ListCreateAPIView):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+
+class TransactionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Report.objects.all()
+    serializer_class = ReportSerializer
+
+class NotificationDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer
+
+
+
+
+
+

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'custumer',
     'rest_framework',   
     'corsheaders',
     'django_filters',
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'myot.urls'
@@ -80,12 +82,37 @@ WSGI_APPLICATION = 'myot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',   # Replace with your database name
+        'USER': 'root',       # Replace with your database username
+        'PASSWORD': 'oUtome3fby6NvV9jYCk2',  # Replace with your database password
+        'HOST': 'containers-us-west-81.railway.app',    # Replace with your database host (e.g., 'localhost' for local development)
+        'PORT': '6297',         # Replace with your database port if needed (the default is 3306)
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'myhot',   # Replace with your database name
+#         'USER': 'root',       # Replace with your database username
+#         'PASSWORD': 'issa01',  # Replace with your database password
+#         'HOST': 'localhost',    # Replace with your database host (e.g., 'localhost' for local development)
+#         'PORT': '3306',         # Replace with your database port if needed (the default is 3306)
+#     }
+# }
+
+
+
 
 
 # Password validation
@@ -105,6 +132,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+],
+}
 
 
 # Internationalization
@@ -129,8 +162,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
+AUTH_USER_MODEL = 'custumer.NewUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",

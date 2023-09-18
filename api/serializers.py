@@ -1,22 +1,9 @@
-# Dans le fichier serializers.py de votre application
-
 from rest_framework import serializers
-from .models import User, Hotel, Room, Booking, Review, Facility, ResidenceType, Residence, ResidenceRoom
+from .models import*
 
-class UserSerializer(serializers.ModelSerializer):
+class PropertySerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = '__all__'
-
-class RoomSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Room
-        fields = '__all__'
-
-class HotelSerializer(serializers.ModelSerializer):
-    rooms = RoomSerializer(many=True, read_only=True)  # Champ pour les chambres associées à l'hôtel
-    class Meta:
-        model = Hotel
+        model = Property
         fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
@@ -29,23 +16,37 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-
-class FacilitySerializer(serializers.ModelSerializer):
+class AmenitySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Facility
+        model = Amenity
         fields = '__all__'
 
-class ResidenceTypeSerializer(serializers.ModelSerializer):
+class HouseRulesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ResidenceType
+        model = HouseRules
         fields = '__all__'
 
-class ResidenceSerializer(serializers.ModelSerializer):
+class PropertyImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Residence
+        model = PropertyImage
         fields = '__all__'
 
-class ResidenceRoomSerializer(serializers.ModelSerializer):
+class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ResidenceRoom
+        model = Notification
+        fields = '__all__'
+
+class ReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = '__all__'
+
+class PropertyAvailabilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PropertyAvailability
+        fields = '__all__'
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
         fields = '__all__'
