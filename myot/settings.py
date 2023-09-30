@@ -82,23 +82,23 @@ WSGI_APPLICATION = 'myot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',   # Replace with your database name
-        'USER': 'postgres',       # Replace with your database username
-        'PASSWORD': '4BAA4DgF5b1FfcC6c3F2G5cg+ACeDeAc',  # Replace with your database password
-        'HOST': 'viaduct.proxy.rlwy.net',    # Replace with your database host (e.g., 'localhost' for local development)
-        'PORT': '46121',         # Replace with your database port if needed (the default is 3306)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',   # Replace with your database name
+#         'USER': 'postgres',       # Replace with your database username
+#         'PASSWORD': '4BAA4DgF5b1FfcC6c3F2G5cg+ACeDeAc',  # Replace with your database password
+#         'HOST': 'viaduct.proxy.rlwy.net',    # Replace with your database host (e.g., 'localhost' for local development)
+#         'PORT': '46121',         # Replace with your database port if needed (the default is 3306)
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
