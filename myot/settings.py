@@ -91,12 +91,12 @@ WSGI_APPLICATION = 'myot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',   # Replace with your database name
-        'USER': 'root',       # Replace with your database username
-        'PASSWORD': 'i0ka265nut5t3y@00a3$wx3auz_vb7ox',  # Replace with your database password
+        'USER': 'postgres',       # Replace with your database username
+        'PASSWORD': '*BB5bda-CBA+C*GBg+g34G+f4Gdcg-13',  # Replace with your database password
         'HOST': 'viaduct.proxy.rlwy.net',    # Replace with your database host (e.g., 'localhost' for local development)
-        'PORT': '19490',         # Replace with your database port if needed (the default is 3306)
+        'PORT': '58446',         # Replace with your database port if needed (the default is 3306)
     }
 }
 
