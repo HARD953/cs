@@ -94,9 +94,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'railway',   # Replace with your database name
         'USER': 'root',       # Replace with your database username
-        'PASSWORD': 'nWuKIZmGRTdee8dKgtJ0',  # Replace with your database password
-        'HOST': 'containers-us-west-158.railway.app',    # Replace with your database host (e.g., 'localhost' for local development)
-        'PORT': '7625',         # Replace with your database port if needed (the default is 3306)
+        'PASSWORD': 'i0ka265nut5t3y@00a3$wx3auz_vb7ox',  # Replace with your database password
+        'HOST': 'viaduct.proxy.rlwy.net',    # Replace with your database host (e.g., 'localhost' for local development)
+        'PORT': '19490',         # Replace with your database port if needed (the default is 3306)
     }
 }
 
