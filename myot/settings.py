@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api',
+    'api',  
     'custumer',
     'rest_framework',   
     'corsheaders',
     'django_filters',
-    'rest_framework_simplejwt.token_blacklist'
+    'rest_framework_simplejwt.token_blacklist',
+    'social_django',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -94,9 +96,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'railway',   # Replace with your database name
         'USER': 'root',       # Replace with your database username
-        'PASSWORD': 'oUtome3fby6NvV9jYCk2',  # Replace with your database password
-        'HOST': 'containers-us-west-81.railway.app',    # Replace with your database host (e.g., 'localhost' for local development)
-        'PORT': '6297',         # Replace with your database port if needed (the default is 3306)
+        'PASSWORD': 'nWuKIZmGRTdee8dKgtJ0',  # Replace with your database password
+        'HOST': 'containers-us-west-158.railway.app',    # Replace with your database host (e.g., 'localhost' for local development)
+        'PORT': '7625',         # Replace with your database port if needed (the default is 3306)
     }
 }
 
@@ -135,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
 ],
 }
 
@@ -182,3 +184,15 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'votre_client_id_google'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'votre_client_secret_google'
+
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+#         'social_django.middleware.SocialAuthenticationMiddleware',
+#         # ...
+#     ),
+# }

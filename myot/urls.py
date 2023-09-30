@@ -10,4 +10,5 @@ urlpatterns = [
     path('api-auth/',include('rest_framework.urls',namespace='rest_framework')),
     path('',include('custumer.urls')),
     path('',include('api.urls')),
+    # path('auth/', include('rest_framework_social_oauth2.urls')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -6,9 +6,19 @@ class PropertySerializer(serializers.ModelSerializer):
         model = Property
         fields = '__all__'
 
+class ImagehotelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Imagehotel
+        fields = '__all__' 
+
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
+        fields = '__all__'
+
+class RoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
         fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -49,4 +59,9 @@ class PropertyAvailabilitySerializer(serializers.ModelSerializer):
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
+        fields = '__all__'
+
+class PropertyTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PropertyType
         fields = '__all__'
