@@ -94,9 +94,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',   # Replace with your database name
         'USER': 'postgres',       # Replace with your database username
-        'PASSWORD': '*BB5bda-CBA+C*GBg+g34G+f4Gdcg-13',  # Replace with your database password
+        'PASSWORD': '4BAA4DgF5b1FfcC6c3F2G5cg+ACeDeAc',  # Replace with your database password
         'HOST': 'viaduct.proxy.rlwy.net',    # Replace with your database host (e.g., 'localhost' for local development)
-        'PORT': '58446',         # Replace with your database port if needed (the default is 3306)
+        'PORT': '46121',         # Replace with your database port if needed (the default is 3306)
     }
 }
 
@@ -183,14 +183,4 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'votre_client_id_google'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'votre_client_secret_google'
 
-
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-#         'social_django.middleware.SocialAuthenticationMiddleware',
-#         # ...
-#     ),
-# }
